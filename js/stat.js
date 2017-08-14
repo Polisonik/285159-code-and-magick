@@ -1,7 +1,7 @@
 'use strict';
 
 window.renderStatistics = function (ctx, names, times) {
-  ctx.fillStyle = 'rgba(0, 0 ,0 , 0.3)';
+  ctx.fillStyle = 'rgba(0, 0 ,0 , 0.7)';
   ctx.fillRect(100, 10, 430, 280);
 
   ctx.fillStyle = 'rgba(256, 256, 256, 1.0)';
