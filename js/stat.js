@@ -21,7 +21,6 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillRect(coordinateX, coordinateY, width, height);
   ctx.strokeRect(coordinateX, coordinateY, width, height);
 
-
   ctx.fillStyle = colorText;
   ctx.font = font;
   ctx.textBaseline = 'top';
@@ -57,7 +56,6 @@ window.renderStatistics = function (ctx, names, times) {
     var opacity;
 
     for (var i = 0; i < arrayTimes.length; i++) {
-
       if (arrayNames[i] === 'Вы') {
         ctx.fillStyle = 'rgba(255, 0, 0, 1)';
       } else {
