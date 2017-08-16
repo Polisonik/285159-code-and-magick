@@ -1,19 +1,35 @@
 'use strict';
 
 window.renderStatistics = function (ctx, names, times) {
-  ctx.fillStyle = 'rgba(0, 0 ,0 , 0.7)';
-  ctx.fillRect(110, 20, 420, 270);
+  var width = 420;
+  var height = 270;
+  var coordinateX = 100;
+  var coordinateY = 10;
+  var shiftShadow = 10;
+  var lineHeight = 20;
+  var colorShadow = 'rgba(0 ,0 ,0, 0.7)';
+  var colorBg = 'rgba(256, 256, 256, 1.0)';
+  var colorText = '#000';
+  var font = '14px PT Mono';
+  var marginTop = 20;
+  var marginLeft = 20;
 
-  ctx.fillStyle = 'rgba(256, 256, 256, 1.0)';
-  ctx.strokeRect(100, 10, 420, 270);
-  ctx.fillRect(100, 10, 420, 270);
+  ctx.fillStyle = colorShadow;
+  ctx.fillRect(coordinateX + shiftShadow, coordinateY + shiftShadow, width, height);
 
-  ctx.fillStyle = '#000';
-  ctx.font = '14px PT Mono';
+  ctx.fillStyle = colorBg;
+  ctx.fillRect(coordinateX, coordinateY, width, height);
+  ctx.strokeRect(coordinateX, coordinateY, width, height);
+
+
+  ctx.fillStyle = colorText;
+  ctx.font = font;
   ctx.textBaseline = 'top';
 
-  ctx.fillText('Ура вы победили!', 120, 30);
-  ctx.fillText('Список результатов:', 120, 50);
+  ctx.fillText('Ура вы победили!', coordinateX + marginLeft, coordinateY + marginTop);
+  ctx.fillText('Список результатов:', coordinateX + marginLeft, coordinateY + marginTop + lineHeight);
+
+  drawHistogram(times, names, getMaxItem(times));
 
   function getMaxItem(array) {
     var maxItem = -1;
@@ -46,7 +62,7 @@ window.renderStatistics = function (ctx, names, times) {
         ctx.fillStyle = 'rgba(255, 0, 0, 1)';
       } else {
         opacity = Math.random();
-        ctx.fillStyle = 'rgba(000,000,255,' + opacity + ')';
+        ctx.fillStyle = 'rgba(000, 000, 255,' + opacity + ')';
       }
 
       ctx.fillRect(indentX + stepX * i, indentY + histogramHeight - arrayTimes[i] * proportion, barWidth, arrayTimes[i] * proportion);
@@ -55,6 +71,4 @@ window.renderStatistics = function (ctx, names, times) {
       ctx.fillText(arrayNames[i], indentX + stepX * i, indentY + histogramHeight + indentBottom);
     }
   }
-
-  drawHistogram(times, names, getMaxItem(times));
 };
