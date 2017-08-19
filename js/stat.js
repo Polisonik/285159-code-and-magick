@@ -33,7 +33,6 @@ window.renderStatistics = function (ctx, names, times) {
   function drawText(color, fontText, coordinateXText, coordinateYText, marginLeftText, marginTopText, lineHeightText) {
     ctx.fillStyle = color;
     ctx.font = fontText;
-
     ctx.textBaseline = 'top';
     ctx.fillText('Ура вы победили!', coordinateXText + marginLeftText, coordinateYText + marginTopText);
     ctx.fillText('Список результатов:', coordinateXText + marginLeftText, coordinateYText + marginTopText + lineHeightText);
