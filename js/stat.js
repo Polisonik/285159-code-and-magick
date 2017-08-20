@@ -14,21 +14,29 @@ window.renderStatistics = function (ctx, names, times) {
   var marginTop = 20;
   var marginLeft = 20;
 
-  ctx.fillStyle = colorShadow;
-  ctx.fillRect(coordinateX + shiftShadow, coordinateY + shiftShadow, width, height);
-
-  ctx.fillStyle = colorBg;
-  ctx.fillRect(coordinateX, coordinateY, width, height);
-  ctx.strokeRect(coordinateX, coordinateY, width, height);
-
-  ctx.fillStyle = colorText;
-  ctx.font = font;
-  ctx.textBaseline = 'top';
-
-  ctx.fillText('Ура вы победили!', coordinateX + marginLeft, coordinateY + marginTop);
-  ctx.fillText('Список результатов:', coordinateX + marginLeft, coordinateY + marginTop + lineHeight);
-
+  drawShadow(colorShadow, coordinateX, coordinateY, shiftShadow, width, height);
+  drawCloud(colorBg, coordinateX, coordinateY, width, height);
+  drawText(colorText, font, coordinateX, coordinateY, marginLeft, marginTop, lineHeight);
   drawHistogram(times, names, getMaxItem(times));
+
+  function drawShadow(color, coordinateXShadow, coordinateYShadow, shift, widthShadow, heightShadow) {
+    ctx.fillStyle = color;
+    ctx.fillRect(coordinateXShadow + shift, coordinateYShadow + shift, widthShadow, heightShadow);
+  }
+
+  function drawCloud(color, coordinateXCloud, coordinateYCloud, widthCloud, heightCloud) {
+    ctx.fillStyle = color;
+    ctx.fillRect(coordinateXCloud, coordinateYCloud, widthCloud, heightCloud);
+    ctx.strokeRect(coordinateXCloud, coordinateYCloud, widthCloud, heightCloud);
+  }
+
+  function drawText(color, fontText, coordinateXText, coordinateYText, marginLeftText, marginTopText, lineHeightText) {
+    ctx.fillStyle = color;
+    ctx.font = fontText;
+    ctx.textBaseline = 'top';
+    ctx.fillText('Ура вы победили!', coordinateXText + marginLeftText, coordinateYText + marginTopText);
+    ctx.fillText('Список результатов:', coordinateXText + marginLeftText, coordinateYText + marginTopText + lineHeightText);
+  }
 
   function getMaxItem(array) {
     var maxItem = -1;
