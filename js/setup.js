@@ -1,25 +1,42 @@
 'use strict';
-var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
+var wizardNames = getNames();
+var wizardSurnames = getSurnames();
+var coatColor = getCoatColor();
+var eyesColor = getEyesColor();
+var wizards = fillWizardsArray(wizardNames, wizardSurnames, coatColor, eyesColor);
 
-var userDialog = document.querySelector('.setup');
+openWindowSetup();
+addContentWizardsList(wizards);
+openWindowWizardFriends();
 
-userDialog.classList.remove('hidden');
-
-var similarListElement = document.querySelector('.setup-similar-list');
-var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
-
-var wizards = fillWizardsArray(WIZARD_NAMES, WIZARD_SURNAMES, COAT_COLOR, EYES_COLOR);
-
-var fragment = document.createDocumentFragment();
-for (var i = 0; i < 4; i++) {
-  fragment.appendChild(drawWizard(wizards[i]));
+function getNames() {
+  return ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 }
-similarListElement.appendChild(fragment);
 
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
+function getSurnames() {
+  return ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
+}
+
+function getCoatColor() {
+  return ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+}
+
+function getEyesColor() {
+  return ['black', 'red', 'blue', 'yellow', 'green'];
+}
+
+function openWindowSetup() {
+  document.querySelector('.setup').classList.remove('hidden');
+}
+
+function openWindowWizardFriends() {
+  var userDialog = document.querySelector('.setup');
+  userDialog.querySelector('.setup-similar').classList.remove('hidden');
+}
+
+function getRandIndex(array) {
+  return Math.floor(Math.random() * array.length);
+}
 
 function fillWizardsArray(namesArray, surnamesArray, coatArray, eyesArray) {
   var wizardsArray = [];
@@ -35,6 +52,7 @@ function fillWizardsArray(namesArray, surnamesArray, coatArray, eyesArray) {
 }
 
 function drawWizard(wizard) {
+  var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
@@ -44,6 +62,11 @@ function drawWizard(wizard) {
   return wizardElement;
 }
 
-function getRandIndex(array) {
-  return Math.floor(Math.random() * array.length);
+function addContentWizardsList(wizardsArray) {
+  var similarListElement = document.querySelector('.setup-similar-list');
+  var fragment = document.createDocumentFragment();
+  for (var i = 0; i < 4; i++) {
+    fragment.appendChild(drawWizard(wizardsArray[i]));
+  }
+  similarListElement.appendChild(fragment);
 }
