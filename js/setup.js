@@ -16,7 +16,7 @@ function getCoatColor() {
 function getEyesColor() {
   return ['black', 'red', 'blue', 'yellow', 'green'];
 }
-// Создание массива из объектов, которые описывают друзей волшебника
+// Создание массива из друзей волшебника
 function generateWizardsArray() {
   var wizardsOptions = [];
   var numberWizards = 4;
@@ -26,17 +26,23 @@ function generateWizardsArray() {
   var eyesColors = getEyesColor();
 
   for (var i = 0; i < numberWizards; i++) {
-    var indexFirst = getRandIndex(names);
-    var indexSecond = getRandIndex(surnames);
-    var indexThird = getRandIndex(coatColors);
-    var indexFourth = getRandIndex(eyesColors);
-    var choiceSurname = surnames.splice(indexSecond, 1);
-
-    wizardsOptions.push({name: names[indexFirst] + ' ' + choiceSurname, coatColor: coatColors[indexThird], eyesColor: eyesColors[indexFourth]});
+    wizardsOptions.push(generateWizard(names, surnames, coatColors, eyesColors));
   }
   return wizardsOptions;
 }
-
+// Создание одного волшебника
+function generateWizard(namesArray, surnamesArray, coatColorsArray, eyesColorsArray) {
+  var indexFirst = getRandIndex(namesArray);
+  var indexSecond = getRandIndex(surnamesArray);
+  var indexThird = getRandIndex(coatColorsArray);
+  var indexFourth = getRandIndex(eyesColorsArray);
+  var choiceSurname = surnamesArray.splice(indexSecond, 1);
+  var wizard = {};
+  wizard.name = namesArray[indexFirst] + ' ' + choiceSurname;
+  wizard.coatColor = coatColorsArray[indexThird];
+  wizard.eyesColor = eyesColorsArray[indexFourth];
+  return wizard;
+}
 // Открытие окна с настройками игрока
 function openSetup() {
   var userDialog = document.querySelector('.setup');
