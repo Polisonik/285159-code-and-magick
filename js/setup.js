@@ -1,9 +1,12 @@
 'use strict';
 
-openSetup();
-addContentWizards();
-openSetupFriend();
+init();
 
+function init() {
+  openSetup();
+  addContentWizards();
+  openSetupFriend();
+}
 function getNames() {
   return ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 }
